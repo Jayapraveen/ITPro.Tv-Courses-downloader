@@ -1,8 +1,8 @@
 # ITPro.Tv Courses downloader
 
-## Created to be useful in Feb 29 of a leap year where the site gives full day free access to all the courses also should work on all accounts that have full site access
+## Created to be useful on Feb 29 of a leap year where the site gives full day free access to all the courses, also should work on any accounts that have full site access
 
-## How to useful
+## How to use
 1. Download the python script.
 2. Open the script in an Ide.
 3. Enter your credentials inside Login function(You can see when you open the file)
