@@ -98,7 +98,7 @@ episodes = json.loads(episodes.text)
 episodes = get_episodes(episodes)
 episode_links = get_link(episodes)
 episodes_download_links = get_download_links(episode_links,data_auth)
-writer = open("download_link",'a+')
+writer = open("download_links.txt",'a+')
 for i in episodes_download_links:
     writer.write(str(i))
     writer.write("\n")
