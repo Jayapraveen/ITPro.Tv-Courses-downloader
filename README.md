@@ -4,7 +4,7 @@
 1. Download the python script.
 2. Login to the ITPro.tv site on a web browser after opening the network tab on the developer tools
 3. Click dashboard and search for "passedToken" and copy the token starting with "eyJ" completely to clipboard
-![Token Instructions](https://imgur.com/a/LGltPdr)
+![Token Instructions](https://i.imgur.com/gCrSSnQ.png)
 4. Open the script in an text editor of your choice.
 5. paste the token by replacing the "eyJxxxx.eyJxxxxx0" in login_data string
 6. Run the script.
