@@ -12,7 +12,7 @@
 8. Enter the number corresponding to the title.
 9. Wait till the script finishes downloading.
 
-##NOTE: 
+## NOTE: 
 To get the download links instead of downloading the videos, change the method in the config file to "list". "download_links.txt" file on the same directory where the script is located will appear having the download links of all the videos files. Use any downloading softwares such as IDM/Aria2 to download the videos files.
 
 ## Usage Disclaimer
