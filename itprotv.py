@@ -1,10 +1,10 @@
 #/bin/python3
 """
-Date : 3/19/2021
+Date : 3/22/2021
 Place : India
 Author : Jayapraveen AR
-Program aim : To generate downloadable video links at ITProtv website
-Version : 1.0.3
+Program aim : To download course videos from ITProtv website
+Version : 1.0.4
 ToDo:
 1.Download Attachments
 2.Download subtitles
@@ -20,8 +20,10 @@ iter_course_url = "https://api.itpro.tv/api/urza/v3/consumer-web/course?url="
 brand = "ITProTV"
 brand_itpro = "00002560-0000-3fa9-0000-1d61000035f3"
 ua = "ItProTvApp/2.3.7 (7) (Ios 13; en)"
+# Retry times
+retry = 3
 
-resolution_data = {"1080p": "jwVideo1080Embed", "720p": "jwVideo720Embed", "480p": "jwVideo480Embed", "320p": "jwVideo320Embed"}
+resolution_data = {"1080p": "jwVideo1080Embed", "720p": "jwVideo720Embed", "480p": "jwVideo480Embed"}
 def list_categories(course_tags):
     categories = []
     for index,course in enumerate(course_tags):
@@ -83,11 +85,6 @@ def get_link(episodes):
     for i in episodes:
         link = episode_url + i
         links.append(link)
-    errorlink = "https://api.itpro.tv/api/mobile/v1/episode/elbauto-scaling/sources"
-    try:
-        links.remove(errorlink)
-    except:
-        print("Error link does not exist")
     return links
 
 def get_download_links(episode_links,data_auth,resolution):
@@ -141,8 +138,8 @@ if(method == "download"):
         url = data[1]
         download_video(url,filename)
 else:
-    writer = open("download_links.txt",'a+')
-    for key,value in episodes_download_links:
-        writer.write(value)
+    writer = open("download_links.txt",'w')
+    for filename,url in episodes_download_links.items():
+        writer.write(url)
         writer.write("\n")
     writer.close()
