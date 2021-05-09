@@ -107,7 +107,7 @@ else:
 session_token = config_data.get("token",None)
 download_location = config_data.get("downloadLocation",".")
 os.chdir(download_location)
-if(len(session_token) != 865):
+if(len(session_token) != 841):
     exit("Token entered is not valid!")
 resolution = config_data.get("downloadQuality",None)
 next_resolution = resolution_data.get(str(int(resolution.split('p')[0])-360) + 'p')
