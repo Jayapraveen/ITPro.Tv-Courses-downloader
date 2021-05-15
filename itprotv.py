@@ -1,10 +1,10 @@
 #/bin/python3
 """
-Date : 3/22/2021
+Date : 5/15/2021
 Place : India
 Author : Jayapraveen AR
 Program aim : To download course videos from ITProtv website
-Version : 1.0.4
+Version : 1.0.5
 ToDo:
 1.Download Attachments
 2.Download subtitles
@@ -16,12 +16,21 @@ tags_url = "https://api.itpro.tv/api/mobile/v1/tag_categories/brand/ITProTV"
 iter_cert_course_url = "https://api.itpro.tv/api/mobile/v1/brand/ITProTV/tag_categories/certification/"
 iter_category_course_url = "https://api.itpro.tv/api/mobile/v1/brand/ITProTV/tag_categories/course-library/"
 iter_course_url = "https://api.itpro.tv/api/urza/v3/consumer-web/course?url="
+user_info_url = "https://api.itpro.tv/api/urza/v3/consumer-web/user-config"
 #Device details
 brand = "ITProTV"
 brand_itpro = "00002560-0000-3fa9-0000-1d61000035f3"
 ua = "ItProTvApp/2.3.7 (7) (Ios 13; en)"
 # Retry times
 retry = 3
+
+def token_validation():
+    out_data = requests.get(user_info_url, headers = data_auth)
+    if(out_data.status_code) == 200:
+        return True
+    else:
+        return False
+
 
 resolution_data = {"1080p": "jwVideo1080Embed", "720p": "jwVideo720Embed", "480p": "jwVideo480Embed"}
 def list_categories(course_tags):
@@ -97,8 +106,9 @@ def get_download_links(episode_links,data_auth,resolution):
         download_links[req_data["episode"]["title"]] = req_data["episode"][resolution] # Add the episode url corresponding to the resolution selected
     return download_links
 
-if os.path.isfile("itprodownloader.json"):
-    with open("itprodownloader.json",'r') as config:
+os.path.join(os.getcwd())
+if os.path.isfile("itprodownloaderConfig.json"):
+    with open("itprodownloaderConfig.json",'r') as config:
         config_data = config.read()
     config_data = json.loads(config_data)
 else:
@@ -106,15 +116,14 @@ else:
 
 session_token = config_data.get("token",None)
 download_location = config_data.get("downloadLocation",".")
+data_auth = {"Authorization":"Bearer "+session_token,"user-agent":ua}
+print("Token is Valid!\n") if token_validation() else exit("Token Error! Recheck and fix token in the configuration")
 os.chdir(download_location)
-if(len(session_token) != 841):
-    exit("Token entered is not valid!")
 resolution = config_data.get("downloadQuality",None)
 next_resolution = resolution_data.get(str(int(resolution.split('p')[0])-360) + 'p')
 resolution = resolution_data.get(resolution,None)
 exit("Download Quality entered is invalid..") if(resolution == None) else 1
 method = config_data.get("method","download")
-data_auth = {"Authorization":"Bearer "+session_token,"user-agent":ua}
 course_data = requests.get(tags_url)
 course_data = json.loads(course_data.text)
 course_library_url = course_data['tagCategories'][0]['url']
