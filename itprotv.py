@@ -9,7 +9,7 @@ ToDo:
 1.Download Attachments
 2.Download subtitles
 """
-import requests,json,os,shutil
+import requests,json,os,shutil,re
 
 #Endpoints
 tags_url = "https://api.itpro.tv/api/mobile/v1/tag_categories/brand/ITProTV"
@@ -23,6 +23,10 @@ brand_itpro = "00002560-0000-3fa9-0000-1d61000035f3"
 ua = "ItProTvApp/2.3.7 (7) (Ios 13; en)"
 # Retry times
 retry = 3
+
+def sanitize(video_name):
+        video_name = re.sub('[^0-9a-zA-Z\.\s\(\)\-]','',video_name)
+        return video_name
 
 def token_validation():
     out_data = requests.get(user_info_url, headers = data_auth)
@@ -144,6 +148,7 @@ episodes_download_links = get_download_links(episode_links,data_auth,resolution)
 if(method == "download"):
     for index,data in enumerate(episodes_download_links.items()):
         filename = str(index) + '.' +data[0] + ".mp4"
+        filename = sanitize(filename)
         url = data[1]
         download_video(url,filename)
 else:
