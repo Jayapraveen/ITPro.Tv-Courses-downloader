@@ -24,6 +24,7 @@ ua = "ItProTvApp/2.3.7 (7) (Ios 13; en)"
 # Retry times
 retry = 3
 
+
 def sanitize(video_name):
         video_name = re.sub('[^0-9a-zA-Z\.\s\(\)\-]','',video_name)
         return video_name
@@ -151,6 +152,17 @@ if(method == "download"):
         filename = sanitize(filename)
         url = data[1]
         download_video(url,filename)
+elif(method == "aria2c"):
+    writer = open("download_links.txt",'w')
+    for index,data in enumerate(episodes_download_links.items()):
+        filename = str(index) + '.' +data[0] + ".mp4"
+        filename = sanitize(filename)
+        url = data[1]
+        url_string = url + "\n" + "\t" + "out=" + filename
+        writer.write(url_string)
+        writer.write("\n")
+    writer.close()
+
 else:
     writer = open("download_links.txt",'w')
     for filename,url in episodes_download_links.items():

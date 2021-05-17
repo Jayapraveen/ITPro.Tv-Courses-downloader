@@ -13,7 +13,8 @@
 9. Wait till the script finishes downloading.
 
 ## NOTE: 
-To get the download links instead of downloading the videos, change the method in the config file to "list". "download_links.txt" file on the same directory where the script is located will appear having the download links of all the videos files. Use any downloading softwares such as IDM/Aria2 to download the videos files.
+1.To get the download links instead of downloading the videos, change the method in the config file to "list". "download_links.txt" file on the same directory where the script is located will appear having the download links of all the videos files. Use any downloading softwares such as IDM/Aria2 to download the videos files.
+2. To Get Aria2c compatible url list set the method to "aria2c"
 
 ## Usage Disclaimer
 1. Intended for Educational purposes only.
