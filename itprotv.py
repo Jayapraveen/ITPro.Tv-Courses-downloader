@@ -95,7 +95,7 @@ def download_video(url,filename,epoch = 0):
 
 def get_link(episodes):
     links = []
-    episode_url = "https://api.itpro.tv/api/consumer-web/v2/episode/"
+    episode_url = "https://api.itpro.tv/api/urza/v3/consumer-web/episode?url="
     for i in episodes:
         link = episode_url + i
         links.append(link)
@@ -112,8 +112,8 @@ def get_download_links(episode_links,data_auth,resolution):
     return download_links
 
 os.path.join(os.getcwd())
-if os.path.isfile("itprodownloaderConfig.json"):
-    with open("itprodownloaderConfig.json",'r') as config:
+if os.path.isfile("itProDownloaderConfig.json"):
+    with open("itProDownloaderConfig.json",'r') as config:
         config_data = config.read()
     config_data = json.loads(config_data)
 else:
