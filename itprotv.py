@@ -95,7 +95,7 @@ def download_video(url,filename,epoch = 0):
 
 def get_link(episodes):
     links = []
-    episode_url = "https://api.itpro.tv/api/urza/v3/consumer-web/episode?url="
+    episode_url = f"https://api.itpro.tv/api/urza/v3/consumer-web/brand/{brand_itpro}/episode?url="
     for i in episodes:
         link = episode_url + i
         links.append(link)
